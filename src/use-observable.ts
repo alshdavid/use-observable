@@ -1,20 +1,11 @@
 import { useState, useEffect } from "react";
-import { Subscribable, BehaviorSubject } from 'rxjs'
+import { Subscribable, BehaviorSubject, Observable, Subject } from 'rxjs'
 
-const getDefaultValue = <T>(
-  subscribable: Subscribable<T>
-): T | undefined => {
-  if (!(subscribable instanceof BehaviorSubject)) {
-    return
-  }
-  return subscribable.value
-}
-
-export const useObservable = <T>(
+export const useSubscribable = <T>(
   subscribable: Subscribable<T>, 
-  defaultValue?: T
+  defaultValue: T
 ): T | undefined => {
-  const [ value, setValue ] = useState(defaultValue || getDefaultValue(subscribable));
+  const [ value, setValue ] = useState(defaultValue);
 
   useEffect(
     () => {
@@ -26,3 +17,17 @@ export const useObservable = <T>(
 
   return value;
 };
+
+export const useObservable = <T>(
+  observable: Observable<T>, 
+  defaultValue: T
+) => useSubscribable(observable, defaultValue)
+
+export const useSubject = <T>(
+  subject: Subject<T>, 
+  defaultValue: T
+) => useSubscribable(subject, defaultValue)
+
+export const useBehaviorSubject = <T>(
+  behaviorSubject: BehaviorSubject<T>, 
+) => useSubscribable(behaviorSubject, behaviorSubject.value)

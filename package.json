@@ -1,11 +1,9 @@
 {
-  "name": "use-observable",
+  "name": "use-subscribable",
   "version": "1.0.0",
-  "description": "Allows dereferencing of Observables using React hooks",
+  "description": "Allows accessing Subscribables using React hooks",
   "main": "build/index.js",
-  "types": "index.d.ts",
-  "author": "Gabe Scholz",
-  "homepage": "https://github.com/garbles/use-observable",
+  "author": "David Alsh",
   "license": "MIT",
   "scripts": {
     "start": "parcel demo/index.html --out-dir demo-dist",

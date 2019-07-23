@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { interval, BehaviorSubject } from "rxjs";
-import useObservable from "../src";
+import { useObservable, useBehaviorSubject, useSubscribable } from "../src";
 
 const createBehaviorCounter = () => {
   let i = 0
@@ -17,13 +17,15 @@ const counter = interval(1000)
 const behaviorCounter = createBehaviorCounter()
 
 const App = () => {
-  const a = useObservable(counter, 0);
-  const b = useObservable(behaviorCounter);
+  const a = useSubscribable(counter, 0);
+  const b = useObservable(counter, 0);
+  const c = useBehaviorSubject(behaviorCounter);
 
   return (
     <div>
       <div>Counter A: {a}</div>
       <div>Counter B: {b}</div>
+      <div>Counter C: {c}</div>
     </div>
   );
 };
